@@ -41,8 +41,17 @@ export class Homepage {
     }
 
     createChart() {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myPieChart = new Chart(ctx, {
+            const canvas = document.getElementById('myChart') as HTMLCanvasElement | null;
+            if (!canvas) {
+                console.error("Canvas element with id 'myChart' not found.");
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error("2D context not available on the canvas.");
+                return;
+            }
+            const myPieChart = new Chart(ctx, {
                 type: 'pie',
                 data: this.dataSource
             });
